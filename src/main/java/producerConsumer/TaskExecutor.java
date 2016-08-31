@@ -11,9 +11,8 @@ import java.util.concurrent.BlockingQueue;
 public class TaskExecutor {
     
     /**
-     * so basically what happens is that the higher the fib number, the longer it takes to compute
-     * and the first thread to start will be the last to end as it will go through the early numbers fast
-     * 
+     * so basically what happens is that the numbers take longer and longer to compute due to the 
+     * recursive nature of the fib method.
      * @param args 
      */
 
