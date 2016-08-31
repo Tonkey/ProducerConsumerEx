@@ -1,7 +1,7 @@
 package producerConsumer;
 
+import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,14 +16,16 @@ public class Consumer extends Thread{
     private long toPrint;
     private long sumOfS2 = 0;
     private long timer = 15;
-    public Consumer(BlockingQueue s2){
+    private ArrayList<Thread> threads;
+    public Consumer(BlockingQueue s2, ArrayList<Thread> threads){
         this.s2 = s2;
+        this.threads = threads;
     }
     
     @Override
     public void run() {
         int count = 0;
-        while(count < 11){
+        while(!threads.isEmpty()){
             
                 try {
                     toPrint = (long) s2.take();
@@ -33,8 +35,6 @@ public class Consumer extends Thread{
             
                 
                 
-            
-//            System.out.println("Final sum of all numbers: " + sumOfS2);
             } catch (InterruptedException ex) {
                 
                 Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);

@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  *
  * @author Nicklas Molving
  */
-public class Producer extends Thread implements Subject{
+public class Producer extends Thread{
 
     private BlockingQueue s1;
     private BlockingQueue s2;
@@ -17,16 +17,20 @@ public class Producer extends Thread implements Subject{
     private long toCalc;
     private long res;
     
-    private ArrayList<Observer> observers = new ArrayList();
+    private int taskID;
+    private ArrayList<Thread> threads;
     
-    public Producer(BlockingQueue s1, BlockingQueue s2, Observer o) {
+    public Producer(BlockingQueue s1, BlockingQueue s2, int id, ArrayList<Thread> threads) {
         this.s1 = s1;
         this.s2 = s2;
-        
+        taskID = id;
+        this.threads = threads;
     }
 
     @Override
     public void run() {
+        System.out.println("Thread " + taskID + "Started");
+        long startTime = System.nanoTime();
         while(s1.size()>0){
             toCalc = (long) s1.poll();
             res = fib(toCalc);
@@ -39,8 +43,10 @@ public class Producer extends Thread implements Subject{
                 Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println("no more numbers to be calculated!");
-        
+        long endTime = System.nanoTime();
+        System.out.println("Task " + taskID + "has ended after: " + (endTime-startTime)/1000000 + " milliseconds");
+        threads.remove(this);
+        this.interrupt();
         
     }
 
@@ -51,20 +57,4 @@ public class Producer extends Thread implements Subject{
             return fib(n - 1) + fib(n - 2);
         }
     }
-
-    @Override
-    public void register(Observer o) {
-        observers.add(o);
-    }
-
-    @Override
-    public void unregister(Observer o) {
-        //not used in this example
-    }
-
-    @Override
-    public void notifyObserver() {
-        
-    }
-
 }
