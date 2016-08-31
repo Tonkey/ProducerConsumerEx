@@ -42,6 +42,7 @@ public class Consumer extends Thread{
         }
         
         System.out.println("Final count: " + sumOfS2);
+        this.interrupt();
         
     }
 
