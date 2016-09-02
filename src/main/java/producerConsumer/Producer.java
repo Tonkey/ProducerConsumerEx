@@ -46,7 +46,7 @@ public class Producer extends Thread{
         long endTime = System.nanoTime();
         System.out.println("Task " + taskID + "has ended after: " + (endTime-startTime)/1000000 + " milliseconds");
         threads.remove(this);
-        this.interrupt();
+//        this.interrupt();
         
     }
 

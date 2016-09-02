@@ -19,7 +19,7 @@ public class TaskExecutor {
     
     public static void main(String[] args) {
         //amount of numbers to compute
-        int n = 12;
+        int n = 11;
         
         
         ArrayList<Thread> taskThreads = new ArrayList();
@@ -66,6 +66,6 @@ public class TaskExecutor {
         que.add((long)36);
         que.add((long)37);
         que.add((long)42);
-        que.add((long)43);
+//        que.add((long)43);
     }
 }

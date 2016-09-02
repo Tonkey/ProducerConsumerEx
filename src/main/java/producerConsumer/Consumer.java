@@ -34,7 +34,7 @@ public class Consumer extends Thread{
                 System.out.println(toPrint);
             
                 
-                
+                    System.out.println("number of task Threads: " + threads.size());    
             } catch (InterruptedException ex) {
                 
                 Logger.getLogger(Consumer.class.getName()).log(Level.SEVERE, null, ex);
@@ -42,7 +42,7 @@ public class Consumer extends Thread{
         }
         
         System.out.println("Final count: " + sumOfS2);
-        this.interrupt();
+        
         
     }
 
